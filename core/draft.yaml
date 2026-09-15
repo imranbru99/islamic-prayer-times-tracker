@@ -1,0 +1,125 @@
+models:
+  Category:
+    name: string nullable
+    slug: string nullable
+    status: integer default:0
+    description: string nullable
+    image: string nullable
+
+  SubCategory:
+    name: string nullable
+    slug: string nullable
+    status: integer default:0
+    description: string nullable
+    image: string nullable
+    category_id: string nullable
+
+  Post:
+    title: string:400
+    slug: string nullable
+    meta: string nullable
+    content: longtext
+    image: string nullable
+    status: integer default:0
+    sub_category_id: string nullable
+    author_id: id:user
+
+  Form:
+    title: string:400
+    slug: string nullable
+    meta: string nullable
+    content: longtext
+    image: string nullable
+    status: integer default:0
+    sub_category_id: string nullable
+    author_id: id:user
+
+  Tag:
+    name: string nullable
+    slug: string nullable
+    post_id: string nullable
+
+  Section:
+    icon: string nullable
+    faq: string nullable
+    answer: string nullable
+    contact: string nullable
+    testimonial: string nullable
+
+controllers:
+  Post:
+    index:
+      query: all
+      render: post.index with:posts
+
+    store:
+      validate: title, content, author_id
+      save: post
+      send: ReviewPost to:post.author.email with:post
+      dispatch: SyncMedia with:post
+      fire: NewPost with:post
+      flash: post.title
+      redirect: post.index
+
+  Form:
+    index:
+      query: all
+      render: form.index with:forms
+
+    store:
+      validate: title, content, author_id
+      save: form
+      send: ReviewForm to:form.author.email with:form
+      dispatch: SyncMedia with:form
+      fire: NewForm with:form
+      flash: form.title
+      redirect: form.index
+
+  Category:
+    index:
+      query: all
+      render: category.index with:categories
+
+    store:
+      validate: name, description
+      save: category
+      fire: NewCategory with:category
+      flash: category.name
+      redirect: category.index
+
+  SubCategory:
+    index:
+      query: all
+      render: subCategory.index with:subCategories
+
+    store:
+      validate: name, description
+      save: subCategory
+      fire: NewSubCategory with:subCategory
+      flash: subCategory.name
+      redirect: subCategory.index
+
+  Sitemap:
+    index:
+      query: all
+      render: siteMap.index with:posts, tags, categories, subCategories
+
+  PostSitemap:
+    index:
+      query: all
+      render: siteMap.post with:posts, tags, categories, subCategories
+
+  TagSitemap:
+    index:
+      query: all
+      render: siteMap.post with:posts, tags, categories, subCategories
+
+  CategorySitemap:
+    index:
+      query: all
+      render: siteMap.category with:posts, tags, categories,
+
+  SubCategorySitemap:
+    index:
+      query: all
+      render: siteMap.subCategory with:posts, tags, categories, subCategories

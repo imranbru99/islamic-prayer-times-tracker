@@ -1,0 +1,67 @@
+created:
+    - app/Http/Controllers/PostController.php
+    - app/Http/Controllers/FormController.php
+    - app/Http/Controllers/CategoryController.php
+    - app/Http/Controllers/SubCategoryController.php
+    - app/Http/Controllers/SitemapController.php
+    - app/Http/Controllers/PostSitemapController.php
+    - app/Http/Controllers/TagSitemapController.php
+    - app/Http/Controllers/CategorySitemapController.php
+    - app/Http/Controllers/SubCategorySitemapController.php
+    - database/factories/CategoryFactory.php
+    - database/factories/SubCategoryFactory.php
+    - database/factories/PostFactory.php
+    - database/factories/FormFactory.php
+    - database/factories/TagFactory.php
+    - database/factories/SectionFactory.php
+    - database/migrations/2023_01_23_040643_create_categories_table.php
+    - database/migrations/2023_01_23_040644_create_sub_categories_table.php
+    - database/migrations/2023_01_23_040645_create_posts_table.php
+    - database/migrations/2023_01_23_040646_create_forms_table.php
+    - database/migrations/2023_01_23_040647_create_tags_table.php
+    - database/migrations/2023_01_23_040648_create_sections_table.php
+    - app/Models/Category.php
+    - app/Models/SubCategory.php
+    - app/Models/Post.php
+    - app/Models/Form.php
+    - app/Models/Tag.php
+    - app/Models/Section.php
+    - tests/Feature/Http/Controllers/PostControllerTest.php
+    - tests/Feature/Http/Controllers/FormControllerTest.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - tests/Feature/Http/Controllers/SubCategoryControllerTest.php
+    - tests/Feature/Http/Controllers/SitemapControllerTest.php
+    - tests/Feature/Http/Controllers/PostSitemapControllerTest.php
+    - tests/Feature/Http/Controllers/TagSitemapControllerTest.php
+    - tests/Feature/Http/Controllers/CategorySitemapControllerTest.php
+    - tests/Feature/Http/Controllers/SubCategorySitemapControllerTest.php
+    - app/Events/NewPost.php
+    - app/Events/NewForm.php
+    - app/Events/NewCategory.php
+    - app/Events/NewSubCategory.php
+    - app/Http/Requests/PostStoreRequest.php
+    - app/Http/Requests/FormStoreRequest.php
+    - app/Http/Requests/CategoryStoreRequest.php
+    - app/Http/Requests/SubCategoryStoreRequest.php
+    - app/Jobs/SyncMedia.php
+    - app/Mail/ReviewPost.php
+    - app/Mail/ReviewForm.php
+    - resources/views/post/index.blade.php
+    - resources/views/form/index.blade.php
+    - resources/views/category/index.blade.php
+    - resources/views/subCategory/index.blade.php
+    - resources/views/siteMap/index.blade.php
+    - resources/views/siteMap/post.blade.php
+    - resources/views/siteMap/category.blade.php
+    - resources/views/siteMap/subCategory.blade.php
+updated:
+    - routes/web.php
+skipped:
+    - resources/views/siteMap/post.blade.php
+models:
+    Category: { name: 'string nullable', slug: 'string nullable', status: 'integer default:0', description: 'string nullable', image: 'string nullable' }
+    SubCategory: { name: 'string nullable', slug: 'string nullable', status: 'integer default:0', description: 'string nullable', image: 'string nullable', category_id: 'string nullable' }
+    Post: { title: 'string:400', slug: 'string nullable', meta: 'string nullable', content: longtext, image: 'string nullable', status: 'integer default:0', sub_category_id: 'string nullable', author_id: 'id:user' }
+    Form: { title: 'string:400', slug: 'string nullable', meta: 'string nullable', content: longtext, image: 'string nullable', status: 'integer default:0', sub_category_id: 'string nullable', author_id: 'id:user' }
+    Tag: { name: 'string nullable', slug: 'string nullable', post_id: 'string nullable' }
+    Section: { icon: 'string nullable', faq: 'string nullable', answer: 'string nullable', contact: 'string nullable', testimonial: 'string nullable' }
